@@ -6,11 +6,11 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: db_supermercado
+      POSTGRES_DB: db_comercio
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - "5422:5432"
+      - "5425:5432"
 
 volumes:
   db-data:
