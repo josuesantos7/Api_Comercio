@@ -1,3 +1,5 @@
 /node_modules
 .env
 .gitattributes
+/src/uploads/*
+/src/!uploads/.gitkeep

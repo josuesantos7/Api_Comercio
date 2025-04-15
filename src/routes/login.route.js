@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const Usuario = require('../models/Usuario')
+const { sign } = require('jsonwebtoken')
 
 
 const loginRoutes = new Router()
@@ -31,9 +32,12 @@ const loginRoutes = new Router()
                 email:email
             }
          })
+         const payload = {sub: usuario.id, email: usuario.email, nome: usuario.nome}
+ 
+         const token = sign(payload, process.env.SECRET_JWT)
  
          if(usuario.password === password){
-             return res.status(403).json({ message: "Usuário logado com sucesso"})
+            return res.status(200).json({Token: token})
          } else {
              return res.status(403).json({ message: 'Dados inválidos'})
          }
