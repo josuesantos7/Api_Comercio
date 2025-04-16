@@ -3,12 +3,13 @@ const Produto = require('../models/Produto');
 const upload = require('../multer');
 const path = require('path');
 const fs = require('fs');
+const { auth } = require('../middleware/auth')
 
 
 
 const produtoRoutes = new Router()
 
-produtoRoutes.post("/", upload.single("imagem"),async(req, res) => {
+produtoRoutes.post("/", auth,upload.single("imagem"),async(req, res) => {
     try {
         const descricao_produto = req.body.descricao_produto
         const preco_unitario = req.body.preco_unitario
@@ -56,7 +57,7 @@ produtoRoutes.get('/', async(req, res) => {
     
 })
 
-produtoRoutes.put('/:id_produto', upload.single("imagem"), async(req, res) => {
+produtoRoutes.put('/:id_produto', auth, upload.single("imagem"), async(req, res) => {
     try {
         const { id_produto } = req.params
         const descricao_produto = req.body.descricao_produto
@@ -110,7 +111,7 @@ produtoRoutes.put('/:id_produto', upload.single("imagem"), async(req, res) => {
     }
 })
 
-produtoRoutes.delete('/:id_produto', async(req, res) => {
+produtoRoutes.delete('/:id_produto', auth, async(req, res) => {
     try {
         const { id_produto } = req.params
 

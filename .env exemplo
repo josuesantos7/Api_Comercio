@@ -5,3 +5,4 @@ PASSWORDDB=postgres
 DATABASE=meu_db
 PORT=5432
 PORT_API=3001
+SECRET_JWT=SuaChaveSecreta

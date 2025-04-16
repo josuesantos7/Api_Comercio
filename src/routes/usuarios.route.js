@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const Usuario = require('../models/Usuario')
+const { auth } = require('../middleware/auth')
 
 
 const usuarioRoutes = new Router()
@@ -49,12 +50,12 @@ usuarioRoutes.post('/', async(req, res) => {
 })
 
 
-usuarioRoutes.get('/', async(req, res) => {
+usuarioRoutes.get('/', auth, async(req, res) => {
     const usuarios = await Usuario.findAll()
     res.json(usuarios)
 })
 
-usuarioRoutes.put('/:id', async(req, res) => {
+usuarioRoutes.put('/:id', auth, async(req, res) => {
     try {
 
         let { id } = req.params
@@ -94,7 +95,7 @@ usuarioRoutes.put('/:id', async(req, res) => {
     }
 })
 
-usuarioRoutes.delete('/:id', async(req, res) => {
+usuarioRoutes.delete('/:id', auth, async(req, res) => {
 
     try {
         const { id } = req.params
