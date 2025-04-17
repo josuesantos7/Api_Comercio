@@ -279,7 +279,13 @@
     },
     "/produtos/": {
       "post": {
-        "description": "",
+        "tags": [
+          "Produto"
+        ],
+        "description": "Cadastra um novo produto",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -287,24 +293,42 @@
             "type": "string"
           },
           {
+            "name": "imagem",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "Imagem do produto"
+          },
+          {
             "name": "body",
             "in": "body",
+            "description": "Dados do produto",
             "schema": {
               "type": "object",
               "properties": {
                 "descricao_produto": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Novo Produto"
                 },
                 "preco_unitario": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "12"
                 },
                 "categoria": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "informatica"
                 },
                 "qtde_estoque": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "41"
                 }
-              }
+              },
+              "required": [
+                "descricao_produto",
+                "preco_unitario",
+                "categoria",
+                "qtde_estoque"
+              ]
             }
           }
         ],
@@ -321,7 +345,10 @@
         }
       },
       "get": {
-        "description": "",
+        "tags": [
+          "Produto"
+        ],
+        "description": "Exibe todos os produtos cadastrados",
         "responses": {
           "200": {
             "description": "OK"
@@ -334,13 +361,17 @@
     },
     "/produtos/imagem/{imagem}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Produto"
+        ],
+        "description": "Exibe a imagem do produto",
         "parameters": [
           {
             "name": "imagem",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Requer o path da imagem"
           }
         ],
         "responses": {
@@ -355,13 +386,17 @@
     },
     "/produtos/{id_produto}": {
       "put": {
-        "description": "",
+        "tags": [
+          "Produto"
+        ],
+        "description": "Atualiza produto selecionado",
         "parameters": [
           {
             "name": "id_produto",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Selecionar o Id do produto"
           },
           {
             "name": "authorization",
@@ -369,24 +404,42 @@
             "type": "string"
           },
           {
+            "name": "imagem",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "Nova imagem do produto"
+          },
+          {
             "name": "body",
             "in": "body",
+            "description": "Dados do produto",
             "schema": {
               "type": "object",
               "properties": {
                 "descricao_produto": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Descrição atualizada do Produto"
                 },
                 "preco_unitario": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15"
                 },
                 "categoria": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "informatica"
                 },
                 "qtde_estoque": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "32"
                 }
-              }
+              },
+              "required": [
+                "descricao_produto",
+                "preco_unitario",
+                "categoria",
+                "qtde_estoque"
+              ]
             }
           }
         ],
@@ -406,13 +459,17 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Produto"
+        ],
+        "description": "Deleta produto selecionado",
         "parameters": [
           {
             "name": "id_produto",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Selecionar o id do produto"
           },
           {
             "name": "authorization",
