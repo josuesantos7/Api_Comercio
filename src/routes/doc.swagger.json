@@ -1,0 +1,502 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Comércio",
+    "description": "API para um sistema de comércio",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization",
+      "description": "Token de Autenticação"
+    }
+  },
+  "paths": {
+    "/login/": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Realiza o login no sistema.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "usuario@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "senha123"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/usuarios/": {
+      "post": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Adiciona um novo Usuário",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Novo Usuário"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "12131415161"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "masculino"
+                },
+                "data_nascimento": {
+                  "type": "string",
+                  "example": "1999-07-25"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "usuario@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "senha123456"
+                }
+              },
+              "required": [
+                "nome",
+                "cpf",
+                "sexo",
+                "data_nascimento",
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Exibe todos os Usuários",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "put": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Atualiza usuário cadastrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Nome Atualizado"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "12131415161"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "masculino"
+                },
+                "data_nascimento": {
+                  "type": "string",
+                  "example": "1999-07-25"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "usuario@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "senha123456"
+                }
+              },
+              "required": [
+                "nome",
+                "cpf",
+                "sexo",
+                "data_nascimento",
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "",
+            "description": "Deleta usuário selecionado",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/produtos/": {
+      "post": {
+        "tags": [
+          "Produto"
+        ],
+        "description": "Cadastra um novo produto",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "imagem",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "Imagem do produto"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do produto",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descricao_produto": {
+                  "type": "string",
+                  "example": "Novo Produto"
+                },
+                "preco_unitario": {
+                  "type": "string",
+                  "example": "12"
+                },
+                "categoria": {
+                  "type": "string",
+                  "example": "informatica"
+                },
+                "qtde_estoque": {
+                  "type": "string",
+                  "example": "41"
+                }
+              },
+              "required": [
+                "descricao_produto",
+                "preco_unitario",
+                "categoria",
+                "qtde_estoque"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "description": "Exibe todos os produtos cadastrados",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/produtos/imagem/{imagem}": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "description": "Exibe a imagem do produto",
+        "parameters": [
+          {
+            "name": "imagem",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Requer o path da imagem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/produtos/{id_produto}": {
+      "put": {
+        "tags": [
+          "Produto"
+        ],
+        "description": "Atualiza produto selecionado",
+        "parameters": [
+          {
+            "name": "id_produto",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Selecionar o Id do produto"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "imagem",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "Nova imagem do produto"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do produto",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descricao_produto": {
+                  "type": "string",
+                  "example": "Descrição atualizada do Produto"
+                },
+                "preco_unitario": {
+                  "type": "string",
+                  "example": "15"
+                },
+                "categoria": {
+                  "type": "string",
+                  "example": "informatica"
+                },
+                "qtde_estoque": {
+                  "type": "string",
+                  "example": "32"
+                }
+              },
+              "required": [
+                "descricao_produto",
+                "preco_unitario",
+                "categoria",
+                "qtde_estoque"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Produto"
+        ],
+        "description": "Deleta produto selecionado",
+        "parameters": [
+          {
+            "name": "id_produto",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Selecionar o id do produto"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ]
+}
